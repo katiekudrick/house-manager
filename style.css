@@ -1,0 +1,346 @@
+body {
+    background-image: url("images/background-img.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: scroll;
+    background-color: #EACBC9;
+    color: #0B0B0B;
+    font-family: 'Lora', serif;
+    font-family: 'Yeseva One', cursive;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: xx-large;
+    font-family: 'Yeseva One', cursive;
+}
+
+p {
+    font-family: 'Lora', serif;
+}
+
+button {
+    background-color: #559CAD;
+    border: 1px solid #0B0B0B;
+    color: white;
+    font-family: 'Lora', serif;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: #51744E;
+}
+
+footer {
+    font-family: 'Lora', serif;
+    margin-top: auto; /* Push the footer to the bottom */
+    background-color: #BDA2C5;
+    padding: 5px;
+    text-align: center;
+    color: #0B0B0B;
+    font-size: 11px;
+    width: 100%;
+    position: fixed; /* Add a fixed position */
+    bottom: 0; /* Position it at the bottom */
+    left: 0; /* Align it to the left edge */
+}
+
+/* --------------------------------------------------- */
+
+/* Banner */
+
+.header {
+    margin: 20px 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 150px;
+    border: 1px solid #0B0B0B;
+}
+
+.add-item-container {
+    padding-left: 150px;
+}
+
+.add-item-container.split {
+    margin-left: auto; 
+    display: flex;    
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: #000;
+    margin: 20px 0;
+}
+
+
+/* --------------------------------------------------- */
+
+/* Pop-Up Screen */
+
+.pop-up {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.pop-up-content {
+    background-color: #824670;
+    color: white;
+    position: fixed;
+    border: 2px solid #0B0B0B;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 900px;
+    height: 50%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.row {
+    padding: auto;
+    margin-bottom: 10px;
+}
+
+#form-add-item {
+    padding: 20px;
+}
+
+#form-add-item .row {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+#form-add-item .row input[type="text"],
+#form-add-item .row input[type="number"],
+#form-add-item .row input[type="date"] {
+    width: 100%;
+    height: 30px; 
+    line-height: 30px;
+    box-sizing: border-box;
+    font-family: 'Lora', serif;
+    font-size: 14px;
+}
+
+.close-btn {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #89b357;
+
+}
+  
+.close-btn:hover,
+.close-btn:focus {
+    color: #F5DAB8;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input[type=text],
+input[type=number] {
+    font-family: 'Lora', serif;
+    width: 100%; 
+    padding: 12px 20px;
+    margin: 8px 0; 
+    display: inline-block;
+    border: 1px solid #CE8BB6;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.dropdown select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #CE8BB6;
+    box-sizing: border-box;
+    background-color: #EACBC9 !important;
+    color: #0B0B0B !important;
+    font-family: 'Lora', serif;
+}
+  
+.dropdown select:focus {
+    outline: none;
+    border-color: #824670;
+    box-shadow: 0 0 0 2px rgba(130, 70, 112, 0.3);
+}
+  
+/* Custom styling for dropdown options */
+.dropdown select option {
+    background-color: #EACBC9 !important;
+    color: #0B0B0B !important;
+    font-family: 'Lora', serif;
+}
+  
+.dropdown select option:hover {
+    background-color: #F5DAB8;
+}
+
+/* Custom styling for dropdown container */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+}
+  
+/* Styling for custom dropdown arrow */
+.dropdown-arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #CE8BB6;
+    pointer-events: none;
+}
+  
+/* Styling for custom dropdown */
+.custom-dropdown {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    border: 1px solid #CE8BB6;
+    border-radius: 4px;
+    background-color: #EACBC9;
+    color: #0B0B0B;
+    font-family: 'Lora', serif;
+    font-size: 16px; 
+    font-weight: bold;
+    width: 100%;
+}
+  
+.custom-dropdown:focus {
+    outline: none;
+    border-color: #824670;
+    box-shadow: 0 0 0 2px rgba(130, 70, 112, 0.3);
+}
+  
+input[type=submit] {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+/* --------------------------------------------------- */
+  
+/* Table Title */
+
+label {
+    font-weight: 400;
+    font-style: bold;
+    font-size: larger;
+    margin-bottom: 10px;
+}
+
+/* --------------------------------------------------- */
+
+/* Table */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: #D8ACBE;
+    color: #0B0B0B;
+    font-family: 'Lora', serif;
+    font-size: 16.5px;
+    font-weight: 400;
+    padding: 10px; /* Add padding around the table */
+}  
+  
+th,
+td {
+    padding: 8px;
+    vertical-align: top;
+    text-align: left;
+    border: 1px solid #0B0B0B;
+}
+  
+th {
+    background-color: #824670;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+}
+  
+tbody tr:hover {
+    background-color: #F5DAB8;
+} 
+
+/* --------------------------------------------------- */
+
+/* From app.mjs */
+
+.sub-heading {
+    font-size: 15px;
+    color: #824670;
+}
+
+.item-id {
+    font-size: 13px;
+    color: #559CAD;
+}
+
+
+/* Floating column for labels: 25% width */
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+  
+/* Floating column for inputs: 75% width */
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+  
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+  
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+.col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+}
+}

@@ -1,0 +1,12 @@
+Step 0: Come up with app idea and design endpoints.
+
+Step 1: Write initial backend protoype.
+
+Step 2: Write curl commands that test backend happy path.
+
+Step 3: Write curl commands that test all possible errors.
+
+Step 4: Implement error checking on backend.
+
+Step 5: Port curl commands to JavaScript as a standalone Node.js script. 
+

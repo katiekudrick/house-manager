@@ -1,0 +1,25 @@
+{
+  "name": "cost_per_use_web_app",
+  "version": "1.0.0",
+  "description": "Personal use item tracking app",
+  "main": "app.mjs",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katiekudrick/personal-daily-usage-tracker.git"
+  },
+  "keywords": [
+    "item",
+    "tracker",
+    "use"
+  ],
+  "author": "Katie Kudrick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katiekudrick/personal-daily-usage-tracker/issues"
+  },
+  "homepage": "https://github.com/katiekudrick/personal-daily-usage-tracker#readme"
+}

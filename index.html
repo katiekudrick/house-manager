@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Manager by Katie Kudrick</title>
+    <link rel="icon" href="images/house-manager-favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Yeseva+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <nav class="topnav">
+            <img href="#home" src="images/house-manager-web-app-banner.png" alt="logo" class="logo" />
+        </nav>
+        <div class="add-item-container">    
+            <h2>Need to add inventory to your closet or shelves?</h2>
+            <!-- Button: Add Item Pop-Up Screen -->
+            <button id="add-item-btn">Add New Item</button>
+            <!-- Add Item Pop-Up Screen -->
+        </div>
+    </div>
+
+    <div id="add-item-screen" class="pop-up">
+        <!-- Modal content -->
+        <div class="pop-up-content">
+            <span onclick="document.getElementById('add-item-screen').style.display='none'" class="close-btn"
+                title="Close Modal">&times;</span>
+            <div class="container">
+                <form id="form-add-item">
+                    <div class="row">
+                        <label for="category">Category</label>
+                        <br>
+                        <div class="dropdown-container">
+                            <select class="custom-dropdown" name="category" id="add-item-cat" title="Select a Category">
+                                <option value="" disabled selected hidden>Select a Category</option>
+                                <option value="Tops">Tops</option>
+                                <option value="Bottoms">Bottoms</option>
+                                <option value="Dresses/Rompers">Dresses/Rompers</option>
+                                <option value="Outerwear">Outerwear</option>
+                                <option value="Shoes">Shoes</option>
+                                <option value="Bras">Bras</option>
+                                <option value="Underwear">Underwear</option>
+                                <option value="Bathing Suits">Bathing Suits</option>
+                                <option value="Leisure Wear">Leisure Wear</option>
+                                <option value="Skincare">Skincare</option>
+                                <option value="Makeup">Make-Up</option>
+                                <option value="Haircare">Haircare</option>
+                            </select>
+                            <div class="dropdown-arrow"></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label for="type">What is this?</label>
+                            <input type="text" id="add-item-type" name="type" placeholder="i.e. T-Shirt">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label for="description">Description:</label>
+                            <input type="text" id="add-item-desc" name="description" placeholder="i.e. Black, Crew">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label for="vendor">Vendor:</label>
+                            <input type="text" id="add-item-vendor" name="vendor" placeholder="i.e. Target">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label for="cost">Cost:</label>
+                            <input type="number" id="add-item-cost" name="cost" placeholder="$25.99" step="0.01" min="0">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label for="purchase-date">Purchase Date:</label>
+                            <input type="text" id="add-item-date" name="purchase-date" placeholder="1986-01-15">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <button type="submit">Add New Item</button>
+                        </div>
+                        <div id="success-message"></div> <!-- placeholder for success message -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <section class="dynamic">
+        <div class="table-container" id="page-info">
+            <h2>Item Tracker Table Tool</h2>
+            <form class="row">
+                <label for="category table-dropdown">Choose a Category to View</label>
+                <br>
+                <div class="dropdown-container">
+                    <select class="custom-dropdown" name="category" id="table-dropdown" title="Select a Category">
+                        <option value="all">All</option>
+                        <option value="Tops">Tops</option>
+                        <option value="Bottoms">Bottoms</option>
+                        <option value="Dresses/Rompers">Dresses/Rompers</option>
+                        <option value="Outerwear">Outerwear</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Bras">Bras</option>
+                        <option value="Underwear">Underwear</option>
+                        <option value="Bathing Suits">Bathing Suits</option>
+                        <option value="Leisurewear">Leisurewear</option>
+                        <option value="Skincare">Skincare</option>
+                        <option value="Makeup">Make-Up</option>
+                        <option value="Haircare">Haircare</option>
+                    </select>
+                    <div class="dropdown-arrow"></div>
+                </div>
+                <button type="submit" id="view-category">View Now</button>
+                <br>
+                <h4 id="displayed-category"></h4>
+            </form>
+
+            <div id="table" class="table">
+                <!-- insert dynamic text for current category view here from getAllItemsinCategory(query)-->
+                <table id="all-items-table">
+                    <thead>
+                        <tr>
+                            <th>Item ID#</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Vendor</th>
+                            <th>Cost</th>
+                            <th>Purchase Date</th>
+                            <th>Recorded Uses</th>
+                            <th>Log Use</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rows-all-items">
+                        <!-- insert table from generateFetchedItemsTable(query) that uses getAllItemsinCategory(query), getDetailedItem(items.item_ids[i]), logUseHandler(itemId), logItemUse(itemId) -->
+                        <!-- view item details pop-up window from loadPopUpWindow(id_from_view_btn) that uses getDetailedItem(id_from_view_btn) -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Add event listener to custom dropdown
+        const customDropdowns = document.querySelectorAll('.custom-dropdown');
+        customDropdowns.forEach((dropdown) => {
+          dropdown.addEventListener('change', function () {
+            const selectedOption = this.options[this.selectedIndex];
+            const dropdownContainer = this.parentNode;
+            const dropdownArrow = dropdownContainer.querySelector('.dropdown-arrow');
+            dropdownContainer.style.borderColor = selectedOption.value ? '#CE8BB6' : '#CE8BB6';
+            dropdownArrow.style.borderTopColor = selectedOption.value ? '#CE8BB6' : '#CE8BB6';
+          });
+        });
+      </script>
+    <script type="module" crossorigin="anonymous" src="app.mjs"></script>
+</body>
+<footer>
+    <p>&copy; 2023 House Manager, a personal finance & inventory tracking system. Created by Katie Kudrick. All rights reserved.</p>
+</footer>
+
+</html>
