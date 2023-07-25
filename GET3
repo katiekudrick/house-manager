@@ -1,8 +1,0 @@
-HTTP/1.1 200 OK
-Server: Werkzeug/2.2.2 Python/3.9.7
-Date: Wed, 22 Mar 2023 15:36:30 GMT
-Content-Type: application/json
-Content-Length: 33
-Access-Control-Allow-Origin: *
-Connection: close
-
