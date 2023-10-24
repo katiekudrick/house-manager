@@ -67,7 +67,7 @@ paths:
     get:
       summary: get single item record from database
       parameters:
-        - in: path
+        -in: path
         # below, should it be name or id?
         name: item_id
         required: true
