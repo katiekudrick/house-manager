@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  title: House Manager API
+  description: Personal item cost per use database and budget tool.
+  version: 0.1.9
+
+paths:
+  /add_item:
+    post:
+      summary: add inventory item to database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                type:
+                  type: string
+                description:
+                  type: string
+                vendor:
+                  type: string
+                cost:
+                  type: string
+                purchase_date:
+                  type: string
+      responses:
+        '200':
+          description: returns generated item_id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  item_id:
+                    type: string
+
+  /use_item:
+    post:
+      summary: record date of item useage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                item_id:
+                  type: string
+                use_date:
+                  type: string
+      responses:
+        '200':
+          description: returns confirmaton of item_id use
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /get_item/<item_id>:
+    get:
+      summary: get single item record from database
+      parameters:
+        - in: path
+        # below, should it be name or id?
+        name: item_id
+        required: true
+        schema:
+          type: string  
+      responses:
+        '200':
+          description: returns item record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  item_id:
+                    type: string
+                  category:
+                    type: string
+                  type:
+                    type: string
+                  description:
+                    type: string
+                  vendor:
+                    type: string
+                  cost:
+                    type: string
+                  purchase_date:
+                    type: string
+                  use_records:
+                    type: string
+
+  /get_all_items:
+    get:
+      summary: get all items in database according to category request
+      parameters:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                index:
+                  type: integer
+                  format: int64
+                  minimum: 0
+                count:
+                  type: integer
+                  format: int64
+                  minimum: 0
+      responses:
+        '200':
+          description: returns categorized item_ids
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                # no clue if i did below correct
+                # rtn: `{ 'item_ids': [ '<item_id0>', '<item_id1>', ...] }`
+                  item_ids:
+                    type: array
+                    items: 
+                      type: string
+                  
+/get_categories:
+    get:
+      summary: get group of items from requested category
+        
+      responses:
+        '200':
+          description: returns categorized item_ids
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: string
+                
