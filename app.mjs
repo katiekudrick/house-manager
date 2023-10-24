@@ -267,6 +267,7 @@ async function loadPopUpWindow(id_from_view_btn) {
 
   // Create a new element to display the usage dates
   var usageDatesList = document.createElement("ul");
+  usageDatesList.setAttribute("id", "logged-dates")
 
   // Iterate over each usage date and create a list item element for each date
   itemUseToView.use_records.forEach(function(date) {

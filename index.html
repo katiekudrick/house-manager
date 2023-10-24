@@ -29,7 +29,7 @@
     <div id="add-item-screen" class="pop-up">
         <!-- Modal content -->
         <div class="pop-up-content">
-            <span onclick="document.getElementById('add-item-screen').style.display='none'" class="close-btn"
+            <span onclick="document.getElementById('add-item-screen').style.display='none'" id="close-add-item" class="close-btn"
                 title="Close Modal">&times;</span>
             <div class="container">
                 <form id="form-add-item">
@@ -47,7 +47,7 @@
                                 <option value="Bras">Bras</option>
                                 <option value="Underwear">Underwear</option>
                                 <option value="Bathing Suits">Bathing Suits</option>
-                                <option value="Leisure Wear">Leisure Wear</option>
+                                <option value="Leisurewear">Leisurewear</option>
                                 <option value="Skincare">Skincare</option>
                                 <option value="Makeup">Make-Up</option>
                                 <option value="Haircare">Haircare</option>
@@ -81,7 +81,7 @@
                         </div>
                         <br>
                         <div class="row">
-                            <button type="submit">Add New Item</button>
+                            <button type="submit" id="submit-new-item" >Add New Item</button>
                         </div>
                         <div id="success-message"></div> <!-- placeholder for success message -->
                     </div>
