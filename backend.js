@@ -1,11 +1,19 @@
 import express, { json } from 'express';
 import { randomBytes } from 'crypto';
+import fs from 'fs';
+import YAML from 'yaml';
+import swaggerUi from 'swagger-ui-express';
+
 const app = express();
 import cors from 'cors';
 const port = 3000;
+const file  = fs.readFileSync('./static/swagger.yaml', 'utf8')
+const swaggerDocument = YAML.parse(file)
 
 app.use(json());
 app.use(cors({ origin: '*' , credentials :  true}));
+// Serve Swagger
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 var items = {
     // hard coded data for testing purposes

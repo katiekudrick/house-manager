@@ -37,7 +37,7 @@ paths:
                 properties:
                   item_id:
                     type: string
-
+                    
   /use_item:
     post:
       summary: record date of item useage
@@ -63,16 +63,15 @@ paths:
                   message:
                     type: string
 
-  /get_item/<item_id>:
+  /get_item/{item_id}:
     get:
       summary: get single item record from database
       parameters:
-        -in: path
-        # below, should it be name or id?
-        name: item_id
-        required: true
-        schema:
-          type: string  
+        - in: path
+          name: item_id
+          required: true
+          schema:
+            type: string  
       responses:
         '200':
           description: returns item record
@@ -102,23 +101,18 @@ paths:
     get:
       summary: get all items in database according to category request
       parameters:
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                category:
-                  type: string
-                index:
-                  type: integer
-                  format: int64
-                  minimum: 0
-                count:
-                  type: integer
-                  format: int64
-                  minimum: 0
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: index
+          schema:
+            type: integer
+        - in: query
+          name: count
+          schema:
+            type: integer
       responses:
         '200':
           description: returns categorized item_ids
@@ -127,17 +121,14 @@ paths:
               schema:
                 type: object
                 properties:
-                # no clue if i did below correct
-                # rtn: `{ 'item_ids': [ '<item_id0>', '<item_id1>', ...] }`
                   item_ids:
                     type: array
                     items: 
                       type: string
-                  
-/get_categories:
+
+  /get_categories:
     get:
       summary: get group of items from requested category
-        
       responses:
         '200':
           description: returns categorized item_ids
@@ -147,4 +138,3 @@ paths:
                 type: array
                 items: 
                   type: string
-                
