@@ -145,7 +145,6 @@ def get_all_items():
     try:
         errors = []
 
-    
         required = ['category', 'index', 'count']
     
         # stage one of error checking
@@ -210,15 +209,12 @@ def get_categories():
     
     categories=[]
 
-
     for item_id in items:
         print(items[item_id])   
         category = items[item_id]["category"]
         
         if category not in categories:
             categories.append(category)
-            
-    
 
     print("categories = %s"%(str(categories)))
 
