@@ -2,16 +2,38 @@ import sqlite3
 
 # ------------------------------------------------
 
+items = {
+    # hard coded data for testing
+    'test_item_01': {
+        'category': 'Tops',
+        'type': 'Racerback Tank',
+        'description': 'Forest Green, Ribbed, Cropped',
+        'vendor': 'Target',
+        'cost': '5.99',
+        'purchase_date': '2023-05-13',
+        'use_records': []
+    },
+    'test_item_02': {
+        'category': 'Bottoms',
+        'type': 'Jeans',
+        'description': 'Straight Leg, Ankle, High Rise, Medium Wash',
+        'vendor': 'Gap',
+        'cost': '35.99',
+        'purchase_date': '2023-03-13',
+        'use_records': []
+    }
+}
+
 # /add_item: add one new record to table
 def add_item(item_id, category, type, description, vendor, cost, purchase_date):
     # store the item data in the items dictionary
         items[item_id] = {
-            'category': data['category'],
-            'type': data['type'],
-            'description': data['description'],
-            'vendor': data['vendor'],
-            'cost': data['cost'],
-            'purchase_date': data['purchase_date'],
+            'category': category,
+            'type': type,
+            'description': description,
+            'vendor': vendor,
+            'cost': cost,
+            'purchase_date': purchase_date,
             'use_records': []
         }
 

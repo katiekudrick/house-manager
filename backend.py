@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 from flask_swagger_ui import get_swaggerui_blueprint
 import uuid
 import traceback
+import memory_db 
 
 
 app = Flask(__name__)
@@ -10,28 +11,8 @@ cors = CORS(app)
 
 app.debug = True
 
-items = {
-    # hard coded data for testing
-    'test_item_01': {
-        'category': 'Tops',
-        'type': 'Racerback Tank',
-        'description': 'Forest Green, Ribbed, Cropped',
-        'vendor': 'Target',
-        'cost': '5.99',
-        'purchase_date': '2023-05-13',
-        'use_records': []
-    },
-    'test_item_02': {
-        'category': 'Bottoms',
-        'type': 'Jeans',
-        'description': 'Straight Leg, Ankle, High Rise, Medium Wash',
-        'vendor': 'Gap',
-        'cost': '35.99',
-        'purchase_date': '2023-03-13',
-        'use_records': []
-    }
-}
-
+# TODO: remove this one db_shim is complete
+items = memory_db.items
 
 def create_errors(errors):
     errors_json = {'errors': errors}
@@ -67,16 +48,24 @@ def add_item():
         if errors:
             return create_errors(errors)
 
+        category = data['category']
+        type = data['type']
+        description = data['description']
+        vendor = data['vendor']
+        cost = data['cost']
+        purchase_date = data['purchase_date']
+        
+        memory_db.add_item(item_id, category, type, description, vendor, cost, purchase_date)
         # store the item data in the items dictionary
-        items[item_id] = {
-            'category': data['category'],
-            'type': data['type'],
-            'description': data['description'],
-            'vendor': data['vendor'],
-            'cost': data['cost'],
-            'purchase_date': data['purchase_date'],
-            'use_records': []
-        }
+        # items[item_id] = {
+        #     'category': data['category'],
+        #     'type': data['type'],
+        #     'description': data['description'],
+        #     'vendor': data['vendor'],
+        #     'cost': data['cost'],
+        #     'purchase_date': data['purchase_date'],
+        #     'use_records': []
+        # }
 
         # return the item_id
         return jsonify({'item_id': item_id})

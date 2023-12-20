@@ -4,6 +4,7 @@ import memory_db
 # this will either then call memory-db.py or sqlite-db.py
 # ------------------------------------------------
 
+# TODO: Katie, for each of these functions, make a pass through layer to memory_db.py
 # /add_item: add one new record to table
 def add_item(item_id, category, type, description, vendor, cost, purchase_date):
    pass
@@ -17,7 +18,7 @@ def use_item(item_id, use_date):
 
 # /get_item/{item_id}: query database for one item_id
 def get_item(item_id):
-   pass
+   return memory_db.get_item(item_id)
 
 # /get_all_items: query database and return all records
 def get_all_items(category):
