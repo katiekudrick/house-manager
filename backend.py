@@ -3,6 +3,9 @@ from flask_cors import CORS, cross_origin
 from flask_swagger_ui import get_swaggerui_blueprint
 import uuid
 import traceback
+import sys
+sys.path.append("./database")
+import db_shim
 import memory_db 
 
 
@@ -55,7 +58,8 @@ def add_item():
         cost = data['cost']
         purchase_date = data['purchase_date']
         
-        memory_db.add_item(item_id, category, type, description, vendor, cost, purchase_date)
+        db_shim.add_item(item_id, category, type, description, vendor, cost, purchase_date)
+
         # store the item data in the items dictionary
         # items[item_id] = {
         #     'category': data['category'],
@@ -68,7 +72,9 @@ def add_item():
         # }
 
         # return the item_id
+
         return jsonify({'item_id': item_id})
+    
     except Exception as e:
         print("Exception occurred: %s" %(str(e)))
         traceback.print_exc()
@@ -97,25 +103,26 @@ def use_item():
     use_date = data['use_date']
 
     # check if the item exists
-    if item_id not in items:
+    item = db_shim.get_item(item_id)
+    if item == None:
         return jsonify({'error': 'Item not found'}), 404
 
     # add the use record to the item's use_records list
-    items[item_id]['use_records'].append(use_date)
+    # items[item_id]['use_records'].append(use_date)
+    db_shim.use_item(item_id, use_date)
 
     return jsonify({'message': 'Item ' + item_id + ' use recorded.'})
 
 
 @app.route('/get_item/<item_id>', methods=['GET'])
 def get_item(item_id):
-    # check if the item_id exists
-    if item_id not in items:
-        return jsonify({'error': 'Item not found'}), 404
 
     print("/get_item arg is %s"%(item_id))
 
     # get the item data
-    item = items[item_id]
+    item = db_shim.get_item(item_id)
+    if item == None:
+        return jsonify({'error': 'Item not found'}), 404
 
     # return the item data
     return jsonify({
@@ -129,6 +136,7 @@ def get_item(item_id):
         'use_records': item['use_records']
     })
 
+# TODO: restart here for db_shim conversion work
 @app.route('/get_all_items', methods=['GET'])
 def get_all_items():
     try:
@@ -163,15 +171,18 @@ def get_all_items():
         if errors:
             print("Returning errors: %s"%(errors))
             return create_errors(errors)
-    
+        
+
         # filter the items by category
-        if category != 'all':
-            filtered_items = {
-                item_id: item for item_id, item in items.items()
-                if item['category'] == category
-            }
-        else:
-            filtered_items = items
+        filtered_items = db_shim.get_all_items(category)
+
+        # if category != 'all':
+        #     filtered_items = {
+        #         item_id: item for item_id, item in items.items()
+        #         if item['category'] == category
+        #     }
+        # else:
+        #     filtered_items = items
     
         # sort the items by purchase date
         sorted_items = sorted( filtered_items.values(), key=lambda item: item['purchase_date'])
@@ -194,16 +205,18 @@ def get_all_items():
 
 @app.route('/get_categories', methods=['GET'])
 def get_categories():
-    print(items)
+    # print(items)
     
-    categories=[]
+    # categories=[]
 
-    for item_id in items:
-        print(items[item_id])   
-        category = items[item_id]["category"]
+    # for item_id in items:
+    #     print(items[item_id])   
+    #     category = items[item_id]["category"]
         
-        if category not in categories:
-            categories.append(category)
+    #     if category not in categories:
+    #         categories.append(category)
+    
+    categories = db_shim.get_categories()
 
     print("categories = %s"%(str(categories)))
 

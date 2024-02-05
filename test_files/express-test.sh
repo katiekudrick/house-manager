@@ -1,3 +1,4 @@
+# To run in command line from House_Manager_07-19-23 directory: ./test_files/express-test.sh
 
 # /get_all_items test GET
 curl -D GET "localhost:3000/get_all_items?category=clothes&index=0&count=10"

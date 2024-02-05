@@ -1,4 +1,4 @@
-import database
+import sqlite_db as database
 
 
 item_id = "test-item-add-use"

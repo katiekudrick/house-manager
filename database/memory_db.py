@@ -82,7 +82,7 @@ def get_all_items(category):
     return filtered_items
 
 # /get_categories: 
-def get_categories():
+def get_categories(category):
 
     categories=[]
 

@@ -69,19 +69,20 @@ def get_all_items():
     conn.close()
 
 # /get_categories: 
-def get_categories(category):
+def get_categories():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     categories = []
 
     try:
-        if category == None:
-            cursor.execute("SELECT * FROM inventory")
-        else:   
-            cursor.execute(("SELECT * FROM inventory WHERE category=?"), (category,))
+        # if category == None:
+        #     cursor.execute("SELECT * FROM inventory")
+        # else:   
+        #     cursor.execute(("SELECT * FROM inventory WHERE category=?"), (category,))
+        cursor.execute("SELECT * FROM inventory")
         
         items = cursor.fetchall()
-        
+                
         for item in items:
             (item_id, category, type, description, vendor, cost, purchase_date) = item
             if category not in categories:
