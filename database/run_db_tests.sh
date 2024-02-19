@@ -8,5 +8,7 @@ rm database.db
 python3 tables.py
 
 # run tests
-python3 tests-db.py
+cd ..
+
+python3 database/tests_db.py
 

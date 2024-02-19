@@ -205,17 +205,6 @@ def get_all_items():
 
 @app.route('/get_categories', methods=['GET'])
 def get_categories():
-    # print(items)
-    
-    # categories=[]
-
-    # for item_id in items:
-    #     print(items[item_id])   
-    #     category = items[item_id]["category"]
-        
-    #     if category not in categories:
-    #         categories.append(category)
-    
     categories = db_shim.get_categories()
 
     print("categories = %s"%(str(categories)))

@@ -20,7 +20,7 @@ database.get_item(item_id)
 
 database.get_all_items()
 
-database.get_categories(category)
+database.get_categories()
 
 
 

@@ -1,10 +1,11 @@
 import sqlite3
 
+db_path = 'database/database.db'
 # ------------------------------------------------
 
 # /add_item: add one new record to table
 def add_item(item_id, category, type, description, vendor, cost, purchase_date):
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     try:
@@ -19,7 +20,7 @@ def add_item(item_id, category, type, description, vendor, cost, purchase_date):
 
 # /use_item: 
 def use_item(item_id, use_date):
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     try:
@@ -36,7 +37,7 @@ def use_item(item_id, use_date):
 
 # /get_item/{item_id}: query database for one item_id
 def get_item(item_id):
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     try:
@@ -52,33 +53,48 @@ def get_item(item_id):
     conn.close()
 
 # /get_all_items: query database and return all records
-def get_all_items():
-    conn = sqlite3.connect('database.db')
+def get_all_items(category="all"):
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
     try:
-        cursor.execute(("SELECT * FROM inventory"))
+        if category == "all":
+            cursor.execute(("SELECT * FROM inventory"))
+        else:
+            cursor.execute(("SELECT * FROM inventory WHERE category=?"), (category,))
+
         items = cursor.fetchall()
+
+        result = []
+
         for item in items:
+            (item_id, item_category, item_type, description, vendor, cost, purchase_date) = item
+            result.append({
+                "item_id": item_id,
+                "category": item_category,
+                "type": item_type,
+                "description": description,
+                "vendor": vendor,
+                "cost": cost,
+                "purchase_date": purchase_date
+            })
             print(item)
+
         print("*get_all_items request complete, end of item inventory *")
-        # TODO: return all items
     except sqlite3.Error as e:
         print("SQLite Exception: " + str(e))
+        result = None
 
     conn.close()
+    return result
 
 # /get_categories: 
 def get_categories():
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     categories = []
 
     try:
-        # if category == None:
-        #     cursor.execute("SELECT * FROM inventory")
-        # else:   
-        #     cursor.execute(("SELECT * FROM inventory WHERE category=?"), (category,))
         cursor.execute("SELECT * FROM inventory")
         
         items = cursor.fetchall()
@@ -101,7 +117,7 @@ def get_categories():
 
 # update record
 def update_item(item_id, category, type, description, vendor, cost, purchase_date):
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     try:
@@ -135,7 +151,7 @@ def update_item(item_id, category, type, description, vendor, cost, purchase_dat
 
 # delete record from table
 def delete_item(item_id):
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     try:
